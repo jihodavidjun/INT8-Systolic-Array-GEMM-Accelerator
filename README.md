@@ -1,4 +1,4 @@
-# INT8 Systolic Array Accelerator for Neural Network Inference
+# INT8-Systolic-Array-GEMM-Accelerator
 
 This project implements a **signed INT8 systolic array accelerator** for matrix multiplication, a core operation in modern neural network inference.
 
