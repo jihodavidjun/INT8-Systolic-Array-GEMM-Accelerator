@@ -1,0 +1,72 @@
+
+14. Printing statistics.
+
+=== $paramod\pe\ACC_W=s32'00000000000000000000000000100000 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      671 wires
+      823 wire bits
+        9 public wires
+       99 public wire bits
+        8 ports
+       67 port bits
+      740 cells
+      206   $_ANDNOT_
+       24   $_AND_
+        1   $_MUX_
+       41   $_NAND_
+       42   $_NOR_
+       24   $_NOT_
+       39   $_ORNOT_
+       97   $_OR_
+       48   $_SDFFE_PP0P_
+       18   $_XNOR_
+      200   $_XOR_
+
+=== sa4x4 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       91 wires
+     1091 wire bits
+       91 public wires
+     1091 public wire bits
+       27 ports
+      579 port bits
+       16 submodules
+       16   $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+    11840 sa4x4
+      740 $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+
+        +----------Count including submodules.
+        | 
+    10827 wires
+    14259 wire bits
+      235 public wires
+     2675 public wire bits
+      155 ports
+     1651 port bits
+        - memories
+        - memory bits
+        - processes
+    11840 cells
+     3296   $_ANDNOT_
+      384   $_AND_
+       16   $_MUX_
+      656   $_NAND_
+      672   $_NOR_
+      384   $_NOT_
+      624   $_ORNOT_
+     1552   $_OR_
+      768   $_SDFFE_PP0P_
+      288   $_XNOR_
+     3200   $_XOR_
+       16 submodules
+       16   $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+

@@ -52,7 +52,8 @@ Correctness is verified using a **PyTorch-based golden model**:
 
 The simulation prints:
 
-`PASS: RTL sa4x4 matches PyTorch golden model.`
+PASS: RTL sa4x4 matches PyTorch golden model.
+
 
 if — and only if — all outputs match.
 
@@ -60,7 +61,7 @@ if — and only if — all outputs match.
 
 ## Repository Structure
 
-```markdown
+```
 systolic_pe/
 ├── rtl/ # Hardware design (SystemVerilog)
 │ ├── pe.sv # Processing Element (MAC)
@@ -92,6 +93,16 @@ systolic_pe/
 - **Icarus Verilog** (simulation)
 - **GTKWave** (waveform inspection)
 - **PyTorch** (golden reference model)
+
+---
+
+## Current Status
+
+- ✅ Single PE verified
+- ✅ 2×2 systolic array verified
+- ✅ 4×4 systolic array verified
+- ✅ RTL matches PyTorch GEMM output
+- ⏭️ Future work: memory interfaces, FIFOs, AXI, synthesis
 
 ---
 

@@ -1,0 +1,630 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.61 (git sha1 5ae48ee25f298f7b3c8c0de30bd2f85a94133031, clang++ 14.0.3 -fPIC -O3)
+
+-- Executing script file `synth/yosys.ys' --
+
+1. Executing Verilog-2005 frontend: rtl/pe.sv
+Parsing SystemVerilog input from `rtl/pe.sv' to AST representation.
+verilog frontend filename rtl/pe.sv
+Generating RTLIL representation for module `\pe'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: rtl/sa4x4.sv
+Parsing SystemVerilog input from `rtl/sa4x4.sv' to AST representation.
+verilog frontend filename rtl/sa4x4.sv
+Generating RTLIL representation for module `\sa4x4'.
+Warning: Replacing memory \b_to_pe with list of registers. See rtl/sa4x4.sv:29
+Warning: Replacing memory \a_to_pe with list of registers. See rtl/sa4x4.sv:25
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \sa4x4
+Used module:     \pe
+Parameter \ACC_W = 32
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\pe'.
+Parameter \ACC_W = 32
+Generating RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Reprocessing module sa4x4 because instantiated module $paramod\pe\ACC_W=s32'00000000000000000000000000100000 has become available.
+Generating RTLIL representation for module `\sa4x4'.
+Warning: Replacing memory \b_fwd with list of registers. See rtl/sa4x4.sv:67
+Warning: Replacing memory \a_fwd with list of registers. See rtl/sa4x4.sv:67
+Warning: Replacing memory \b_to_pe with list of registers. See rtl/sa4x4.sv:29
+Warning: Replacing memory \a_to_pe with list of registers. See rtl/sa4x4.sv:25
+
+3.3. Analyzing design hierarchy..
+Top module:  \sa4x4
+Used module:     \pe
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Parameter \ACC_W = 32
+Found cached RTLIL representation for module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+
+3.4. Analyzing design hierarchy..
+Top module:  \sa4x4
+Used module:     $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+
+3.5. Analyzing design hierarchy..
+Top module:  \sa4x4
+Used module:     $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+Removing unused module `\pe'.
+Removed 1 unused modules.
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$rtl/pe.sv:25$93 in module $paramod\pe\ACC_W=s32'00000000000000000000000000100000.
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 64 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.$proc$rtl/pe.sv:25$93'.
+     1/3: $0\acc_reg[31:0]
+     2/3: $0\b_out[7:0]
+     3/3: $0\a_out[7:0]
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:85$222'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:85$221'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:84$220'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:84$219'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:83$218'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:83$217'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:82$216'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:82$215'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:80$214'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:80$213'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:79$212'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:79$211'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:78$210'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:78$209'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:77$208'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:77$207'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:75$206'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:75$205'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:74$204'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:74$203'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:73$202'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:73$201'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:72$200'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:72$199'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:70$198'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:70$197'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:69$196'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:69$195'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:68$194'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:68$193'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:67$192'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:67$191'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:64$190'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:63$189'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:62$188'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:60$187'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:59$186'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:58$185'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:56$184'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:55$183'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:54$182'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:52$181'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:51$180'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:50$179'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:47$178'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:46$177'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:45$176'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:43$175'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:42$174'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:41$173'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:39$172'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:38$171'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:37$170'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:35$169'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:34$168'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:33$167'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:30$166'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:30$165'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:29$164'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:29$163'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:26$162'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:26$161'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:25$160'.
+Creating decoders for process `\sa4x4.$proc$rtl/sa4x4.sv:25$159'.
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\sa4x4.\b_fwd[15]' from process `\sa4x4.$proc$rtl/sa4x4.sv:85$222'.
+No latch inferred for signal `\sa4x4.\a_fwd[15]' from process `\sa4x4.$proc$rtl/sa4x4.sv:85$221'.
+No latch inferred for signal `\sa4x4.\b_fwd[14]' from process `\sa4x4.$proc$rtl/sa4x4.sv:84$220'.
+No latch inferred for signal `\sa4x4.\a_fwd[14]' from process `\sa4x4.$proc$rtl/sa4x4.sv:84$219'.
+No latch inferred for signal `\sa4x4.\b_fwd[13]' from process `\sa4x4.$proc$rtl/sa4x4.sv:83$218'.
+No latch inferred for signal `\sa4x4.\a_fwd[13]' from process `\sa4x4.$proc$rtl/sa4x4.sv:83$217'.
+No latch inferred for signal `\sa4x4.\b_fwd[12]' from process `\sa4x4.$proc$rtl/sa4x4.sv:82$216'.
+No latch inferred for signal `\sa4x4.\a_fwd[12]' from process `\sa4x4.$proc$rtl/sa4x4.sv:82$215'.
+No latch inferred for signal `\sa4x4.\b_fwd[11]' from process `\sa4x4.$proc$rtl/sa4x4.sv:80$214'.
+No latch inferred for signal `\sa4x4.\a_fwd[11]' from process `\sa4x4.$proc$rtl/sa4x4.sv:80$213'.
+No latch inferred for signal `\sa4x4.\b_fwd[10]' from process `\sa4x4.$proc$rtl/sa4x4.sv:79$212'.
+No latch inferred for signal `\sa4x4.\a_fwd[10]' from process `\sa4x4.$proc$rtl/sa4x4.sv:79$211'.
+No latch inferred for signal `\sa4x4.\b_fwd[9]' from process `\sa4x4.$proc$rtl/sa4x4.sv:78$210'.
+No latch inferred for signal `\sa4x4.\a_fwd[9]' from process `\sa4x4.$proc$rtl/sa4x4.sv:78$209'.
+No latch inferred for signal `\sa4x4.\b_fwd[8]' from process `\sa4x4.$proc$rtl/sa4x4.sv:77$208'.
+No latch inferred for signal `\sa4x4.\a_fwd[8]' from process `\sa4x4.$proc$rtl/sa4x4.sv:77$207'.
+No latch inferred for signal `\sa4x4.\b_fwd[7]' from process `\sa4x4.$proc$rtl/sa4x4.sv:75$206'.
+No latch inferred for signal `\sa4x4.\a_fwd[7]' from process `\sa4x4.$proc$rtl/sa4x4.sv:75$205'.
+No latch inferred for signal `\sa4x4.\b_fwd[6]' from process `\sa4x4.$proc$rtl/sa4x4.sv:74$204'.
+No latch inferred for signal `\sa4x4.\a_fwd[6]' from process `\sa4x4.$proc$rtl/sa4x4.sv:74$203'.
+No latch inferred for signal `\sa4x4.\b_fwd[5]' from process `\sa4x4.$proc$rtl/sa4x4.sv:73$202'.
+No latch inferred for signal `\sa4x4.\a_fwd[5]' from process `\sa4x4.$proc$rtl/sa4x4.sv:73$201'.
+No latch inferred for signal `\sa4x4.\b_fwd[4]' from process `\sa4x4.$proc$rtl/sa4x4.sv:72$200'.
+No latch inferred for signal `\sa4x4.\a_fwd[4]' from process `\sa4x4.$proc$rtl/sa4x4.sv:72$199'.
+No latch inferred for signal `\sa4x4.\b_fwd[3]' from process `\sa4x4.$proc$rtl/sa4x4.sv:70$198'.
+No latch inferred for signal `\sa4x4.\a_fwd[3]' from process `\sa4x4.$proc$rtl/sa4x4.sv:70$197'.
+No latch inferred for signal `\sa4x4.\b_fwd[2]' from process `\sa4x4.$proc$rtl/sa4x4.sv:69$196'.
+No latch inferred for signal `\sa4x4.\a_fwd[2]' from process `\sa4x4.$proc$rtl/sa4x4.sv:69$195'.
+No latch inferred for signal `\sa4x4.\b_fwd[1]' from process `\sa4x4.$proc$rtl/sa4x4.sv:68$194'.
+No latch inferred for signal `\sa4x4.\a_fwd[1]' from process `\sa4x4.$proc$rtl/sa4x4.sv:68$193'.
+No latch inferred for signal `\sa4x4.\b_fwd[0]' from process `\sa4x4.$proc$rtl/sa4x4.sv:67$192'.
+No latch inferred for signal `\sa4x4.\a_fwd[0]' from process `\sa4x4.$proc$rtl/sa4x4.sv:67$191'.
+No latch inferred for signal `\sa4x4.\b_to_pe[15]' from process `\sa4x4.$proc$rtl/sa4x4.sv:64$190'.
+No latch inferred for signal `\sa4x4.\b_to_pe[11]' from process `\sa4x4.$proc$rtl/sa4x4.sv:63$189'.
+No latch inferred for signal `\sa4x4.\b_to_pe[7]' from process `\sa4x4.$proc$rtl/sa4x4.sv:62$188'.
+No latch inferred for signal `\sa4x4.\b_to_pe[14]' from process `\sa4x4.$proc$rtl/sa4x4.sv:60$187'.
+No latch inferred for signal `\sa4x4.\b_to_pe[10]' from process `\sa4x4.$proc$rtl/sa4x4.sv:59$186'.
+No latch inferred for signal `\sa4x4.\b_to_pe[6]' from process `\sa4x4.$proc$rtl/sa4x4.sv:58$185'.
+No latch inferred for signal `\sa4x4.\b_to_pe[13]' from process `\sa4x4.$proc$rtl/sa4x4.sv:56$184'.
+No latch inferred for signal `\sa4x4.\b_to_pe[9]' from process `\sa4x4.$proc$rtl/sa4x4.sv:55$183'.
+No latch inferred for signal `\sa4x4.\b_to_pe[5]' from process `\sa4x4.$proc$rtl/sa4x4.sv:54$182'.
+No latch inferred for signal `\sa4x4.\b_to_pe[12]' from process `\sa4x4.$proc$rtl/sa4x4.sv:52$181'.
+No latch inferred for signal `\sa4x4.\b_to_pe[8]' from process `\sa4x4.$proc$rtl/sa4x4.sv:51$180'.
+No latch inferred for signal `\sa4x4.\b_to_pe[4]' from process `\sa4x4.$proc$rtl/sa4x4.sv:50$179'.
+No latch inferred for signal `\sa4x4.\a_to_pe[15]' from process `\sa4x4.$proc$rtl/sa4x4.sv:47$178'.
+No latch inferred for signal `\sa4x4.\a_to_pe[14]' from process `\sa4x4.$proc$rtl/sa4x4.sv:46$177'.
+No latch inferred for signal `\sa4x4.\a_to_pe[13]' from process `\sa4x4.$proc$rtl/sa4x4.sv:45$176'.
+No latch inferred for signal `\sa4x4.\a_to_pe[11]' from process `\sa4x4.$proc$rtl/sa4x4.sv:43$175'.
+No latch inferred for signal `\sa4x4.\a_to_pe[10]' from process `\sa4x4.$proc$rtl/sa4x4.sv:42$174'.
+No latch inferred for signal `\sa4x4.\a_to_pe[9]' from process `\sa4x4.$proc$rtl/sa4x4.sv:41$173'.
+No latch inferred for signal `\sa4x4.\a_to_pe[7]' from process `\sa4x4.$proc$rtl/sa4x4.sv:39$172'.
+No latch inferred for signal `\sa4x4.\a_to_pe[6]' from process `\sa4x4.$proc$rtl/sa4x4.sv:38$171'.
+No latch inferred for signal `\sa4x4.\a_to_pe[5]' from process `\sa4x4.$proc$rtl/sa4x4.sv:37$170'.
+No latch inferred for signal `\sa4x4.\a_to_pe[3]' from process `\sa4x4.$proc$rtl/sa4x4.sv:35$169'.
+No latch inferred for signal `\sa4x4.\a_to_pe[2]' from process `\sa4x4.$proc$rtl/sa4x4.sv:34$168'.
+No latch inferred for signal `\sa4x4.\a_to_pe[1]' from process `\sa4x4.$proc$rtl/sa4x4.sv:33$167'.
+No latch inferred for signal `\sa4x4.\b_to_pe[3]' from process `\sa4x4.$proc$rtl/sa4x4.sv:30$166'.
+No latch inferred for signal `\sa4x4.\b_to_pe[2]' from process `\sa4x4.$proc$rtl/sa4x4.sv:30$165'.
+No latch inferred for signal `\sa4x4.\b_to_pe[1]' from process `\sa4x4.$proc$rtl/sa4x4.sv:29$164'.
+No latch inferred for signal `\sa4x4.\b_to_pe[0]' from process `\sa4x4.$proc$rtl/sa4x4.sv:29$163'.
+No latch inferred for signal `\sa4x4.\a_to_pe[12]' from process `\sa4x4.$proc$rtl/sa4x4.sv:26$162'.
+No latch inferred for signal `\sa4x4.\a_to_pe[8]' from process `\sa4x4.$proc$rtl/sa4x4.sv:26$161'.
+No latch inferred for signal `\sa4x4.\a_to_pe[4]' from process `\sa4x4.$proc$rtl/sa4x4.sv:25$160'.
+No latch inferred for signal `\sa4x4.\a_to_pe[0]' from process `\sa4x4.$proc$rtl/sa4x4.sv:25$159'.
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.\a_out' using process `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.$proc$rtl/pe.sv:25$93'.
+  created $dff cell `$procdff$238' with positive edge clock.
+Creating register for signal `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.\b_out' using process `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.$proc$rtl/pe.sv:25$93'.
+  created $dff cell `$procdff$239' with positive edge clock.
+Creating register for signal `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.\acc_reg' using process `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.$proc$rtl/pe.sv:25$93'.
+  created $dff cell `$procdff$240' with positive edge clock.
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.$proc$rtl/pe.sv:25$93'.
+Removing empty process `$paramod\pe\ACC_W=s32'00000000000000000000000000100000.$proc$rtl/pe.sv:25$93'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:85$222'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:85$221'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:84$220'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:84$219'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:83$218'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:83$217'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:82$216'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:82$215'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:80$214'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:80$213'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:79$212'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:79$211'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:78$210'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:78$209'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:77$208'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:77$207'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:75$206'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:75$205'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:74$204'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:74$203'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:73$202'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:73$201'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:72$200'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:72$199'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:70$198'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:70$197'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:69$196'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:69$195'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:68$194'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:68$193'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:67$192'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:67$191'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:64$190'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:63$189'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:62$188'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:60$187'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:59$186'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:58$185'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:56$184'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:55$183'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:54$182'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:52$181'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:51$180'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:50$179'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:47$178'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:46$177'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:45$176'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:43$175'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:42$174'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:41$173'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:39$172'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:38$171'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:37$170'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:35$169'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:34$168'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:33$167'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:30$166'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:30$165'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:29$164'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:29$163'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:26$162'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:26$161'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:25$160'.
+Removing empty process `sa4x4.$proc$rtl/sa4x4.sv:25$159'.
+Cleaned up 2 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\pe\ACC_W=s32'00000000000000000000000000100000.
+Optimizing module sa4x4.
+
+5. Executing OPT pass (performing simple optimizations).
+
+5.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\pe\ACC_W=s32'00000000000000000000000000100000.
+Optimizing module sa4x4.
+
+5.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Computing hashes of 11 cells of `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Finding duplicate cells in `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Finding identical cells in module `\sa4x4'.
+Computing hashes of 16 cells of `\sa4x4'.
+Finding duplicate cells in `\sa4x4'.
+Removed a total of 0 cells.
+
+5.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\pe\ACC_W=s32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \sa4x4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~9 debug messages>
+
+5.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\pe\ACC_W=s32'00000000000000000000000000100000.
+  Optimizing cells in module \sa4x4.
+Performed a total of 0 changes.
+
+5.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Computing hashes of 11 cells of `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Finding duplicate cells in `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Finding identical cells in module `\sa4x4'.
+Computing hashes of 16 cells of `\sa4x4'.
+Finding duplicate cells in `\sa4x4'.
+Removed a total of 0 cells.
+
+5.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$238 ($dff) from module $paramod\pe\ACC_W=s32'00000000000000000000000000100000 (D = $procmux$233_Y, Q = \a_out, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:337:slice$241 ($sdff) from module $paramod\pe\ACC_W=s32'00000000000000000000000000100000 (D = \a_in, Q = \a_out).
+Adding SRST signal on $procdff$239 ($dff) from module $paramod\pe\ACC_W=s32'00000000000000000000000000100000 (D = $procmux$228_Y, Q = \b_out, rval = 8'00000000).
+Adding EN signal on $auto$ff.cc:337:slice$243 ($sdff) from module $paramod\pe\ACC_W=s32'00000000000000000000000000100000 (D = \b_in, Q = \b_out).
+Adding SRST signal on $procdff$240 ($dff) from module $paramod\pe\ACC_W=s32'00000000000000000000000000100000 (D = $procmux$223_Y, Q = \acc_reg, rval = 0).
+Adding EN signal on $auto$ff.cc:337:slice$245 ($sdff) from module $paramod\pe\ACC_W=s32'00000000000000000000000000100000 (D = $add$rtl/pe.sv:33$94_Y, Q = \acc_reg).
+
+5.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\pe\ACC_W=s32'00000000000000000000000000100000..
+Finding unused cells or wires in module \sa4x4..
+Removed 6 unused cells and 144 unused wires.
+<suppressed ~8 debug messages>
+
+5.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\pe\ACC_W=s32'00000000000000000000000000100000.
+Optimizing module sa4x4.
+
+5.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+5.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod\pe\ACC_W=s32'00000000000000000000000000100000..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \sa4x4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+5.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod\pe\ACC_W=s32'00000000000000000000000000100000.
+  Optimizing cells in module \sa4x4.
+Performed a total of 0 changes.
+
+5.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Computing hashes of 5 cells of `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Finding duplicate cells in `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Finding identical cells in module `\sa4x4'.
+Computing hashes of 16 cells of `\sa4x4'.
+Finding duplicate cells in `\sa4x4'.
+Removed a total of 0 cells.
+
+5.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+5.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod\pe\ACC_W=s32'00000000000000000000000000100000..
+Finding unused cells or wires in module \sa4x4..
+
+5.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod\pe\ACC_W=s32'00000000000000000000000000100000.
+Optimizing module sa4x4.
+
+5.16. Finished fast OPT passes. (There is nothing left to do.)
+
+6. Executing TECHMAP pass (map to technology primitives).
+
+6.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+verilog frontend filename /opt/homebrew/bin/../share/yosys/techmap.v
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `\$connect'.
+Generating RTLIL representation for module `\$input_port'.
+Successfully finished Verilog frontend.
+
+6.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $sdffe.
+Running "alumacc" on wrapper $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=8:Y_WIDTH=16:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=8:Y_WIDTH=16:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$mul:A_SIGNED=1:A_WIDTH=8:B_SIGNED=1:B_WIDTH=8:Y_WIDTH=16:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=32:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=32:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=32:B_SIGNED=0:B_WIDTH=32:Y_WIDTH=32:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$fbc7873bff55778c0b3173955b7e4bce1d9d6834\_90_alu for cells of type $alu.
+Using extmapper maccmap for cells of type $macc_v2.
+  add \a_in * \b_in (8x8 bits, signed)
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000010000 for cells of type $fa.
+Using template $paramod$6df0329addda9228fcc2546de2aaf14ad26c98e1\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000100000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000100000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $or.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000010000 for cells of type $lcu.
+No more expansions possible.
+<suppressed ~716 debug messages>
+
+7. Executing ABC pass (technology mapping using ABC).
+
+7.1. Extracting gate netlist of module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000' to `<abc-temp-dir>/input.blif'..
+
+7.1.1. Executed ABC.
+Extracted 1290 gates and 1339 wires to a netlist network with 48 inputs and 32 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_library /var/folders/qm/_fd36nv53h94pjb5x3481x500000gn/T/yosys-abc-STVqFK/stdcells.genlib 
+ABC: + strash 
+ABC: + dretime 
+ABC: + map 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.1.2. Re-integrating ABC results.
+ABC RESULTS:               AND cells:       48
+ABC RESULTS:            ANDNOT cells:      241
+ABC RESULTS:               MUX cells:        1
+ABC RESULTS:              NAND cells:       24
+ABC RESULTS:               NOR cells:       25
+ABC RESULTS:               NOT cells:       24
+ABC RESULTS:                OR cells:       47
+ABC RESULTS:             ORNOT cells:       64
+ABC RESULTS:              XNOR cells:       34
+ABC RESULTS:               XOR cells:      184
+ABC RESULTS:        internal signals:     1259
+ABC RESULTS:           input signals:       48
+ABC RESULTS:          output signals:       32
+Removing temp directory.
+
+7.2. Extracting gate netlist of module `\sa4x4' to `<abc-temp-dir>/input.blif'..
+Don't call ABC as there is nothing to map.
+
+7.2.1. Executed ABC.
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Removing temp directory.
+Removing global temp directory.
+
+8. Printing statistics.
+
+=== $paramod\pe\ACC_W=s32'00000000000000000000000000100000 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+     1113 wires
+     6871 wire bits
+       10 public wires
+      115 public wire bits
+        8 ports
+       67 port bits
+      740 cells
+      241   $_ANDNOT_
+       48   $_AND_
+        1   $_MUX_
+       24   $_NAND_
+       25   $_NOR_
+       24   $_NOT_
+       64   $_ORNOT_
+       47   $_OR_
+       48   $_SDFFE_PP0P_
+       34   $_XNOR_
+      184   $_XOR_
+
+=== sa4x4 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       91 wires
+     1091 wire bits
+       91 public wires
+     1091 public wire bits
+       27 ports
+      579 port bits
+       16 submodules
+       16   $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+    11840 sa4x4
+      740 $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+
+        +----------Count including submodules.
+        | 
+    17899 wires
+   111027 wire bits
+      251 public wires
+     2931 public wire bits
+      155 ports
+     1651 port bits
+        - memories
+        - memory bits
+        - processes
+    11840 cells
+     3856   $_ANDNOT_
+      768   $_AND_
+       16   $_MUX_
+      384   $_NAND_
+      400   $_NOR_
+      384   $_NOT_
+     1024   $_ORNOT_
+      752   $_OR_
+      768   $_SDFFE_PP0P_
+      544   $_XNOR_
+     2944   $_XOR_
+       16 submodules
+       16   $paramod\pe\ACC_W=s32'00000000000000000000000000100000
+
+9. Executing Verilog backend.
+
+9.1. Executing BMUXMAP pass.
+
+9.2. Executing DEMUXMAP pass.
+Dumping module `$paramod\pe\ACC_W=s32'00000000000000000000000000100000'.
+Dumping module `\sa4x4'.
+
+Warnings: 4 unique messages, 6 total
+End of script. Logfile hash: 9b02299155, CPU: user 0.14s system 0.02s, MEM: 18.75 MB peak
+Yosys 0.61 (git sha1 5ae48ee25f298f7b3c8c0de30bd2f85a94133031, clang++ 14.0.3 -fPIC -O3)
+Time spent: 52% 1x abc (0 sec), 12% 1x techmap (0 sec), ...
