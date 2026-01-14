@@ -1,0 +1,29 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Mon Jan  5 07:23:12 2026
+[*]
+[dumpfile] "/Users/jihojun/Desktop/systolic_pe/sim/pe.vcd"
+[dumpfile_mtime] "Mon Jan  5 06:43:12 2026"
+[dumpfile_size] 2425
+[savefile] "/Users/jihojun/Desktop/systolic_pe/sim/pe.gtkw"
+[timestart] 0
+[size] 1710 1069
+[pos] -1 -2
+*-13.665235 38840 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_pe.
+[sst_width] 193
+[signals_width] 173
+[sst_expanded] 1
+[sst_vpaned_height] 331
+@28
+tb_pe.clk
+tb_pe.reset
+tb_pe.en
+@420
+tb_pe.a_in[7:0]
+tb_pe.b_in[7:0]
+tb_pe.dut.product[15:0]
+tb_pe.dut.acc_reg[31:0]
+tb_pe.acc_out[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

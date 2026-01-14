@@ -1,0 +1,53 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Mon Jan  5 22:25:13 2026
+[*]
+[dumpfile] "/Users/jihojun/Desktop/systolic_pe/sim/sa2x2.vcd"
+[dumpfile_mtime] "Mon Jan  5 22:10:17 2026"
+[dumpfile_size] 4355
+[savefile] "/Users/jihojun/Desktop/systolic_pe/sim/sa2x2.gtkw"
+[timestart] 0
+[size] 1710 1069
+[pos] -1 -2
+*-13.860345 31080 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_sa2x2.
+[treeopen] tb_sa2x2.dut.
+[sst_width] 193
+[signals_width] 174
+[sst_expanded] 1
+[sst_vpaned_height] 331
+@28
+tb_sa2x2.clk
+tb_sa2x2.reset
+tb_sa2x2.en
+@420
+tb_sa2x2.a_row0_in[7:0]
+tb_sa2x2.a_row1_in[7:0]
+tb_sa2x2.b_col0_in[7:0]
+tb_sa2x2.b_col1_in[7:0]
+tb_sa2x2.c00[31:0]
+tb_sa2x2.c01[31:0]
+tb_sa2x2.c10[31:0]
+tb_sa2x2.c11[31:0]
+tb_sa2x2.dut.a00_to_a01[7:0]
+tb_sa2x2.dut.a10_to_a11[7:0]
+tb_sa2x2.dut.b00_to_b10[7:0]
+tb_sa2x2.dut.b01_to_b11[7:0]
+tb_sa2x2.dut.pe00.a_in[7:0]
+tb_sa2x2.dut.pe00.b_in[7:0]
+tb_sa2x2.dut.pe00.product[15:0]
+tb_sa2x2.dut.pe00.acc_reg[31:0]
+tb_sa2x2.dut.pe01.a_in[7:0]
+tb_sa2x2.dut.pe01.b_in[7:0]
+tb_sa2x2.dut.pe01.product[15:0]
+tb_sa2x2.dut.pe01.acc_reg[31:0]
+tb_sa2x2.dut.pe10.a_in[7:0]
+tb_sa2x2.dut.pe10.b_in[7:0]
+tb_sa2x2.dut.pe10.product[15:0]
+tb_sa2x2.dut.pe10.acc_reg[31:0]
+tb_sa2x2.dut.pe11.a_in[7:0]
+tb_sa2x2.dut.pe11.b_in[7:0]
+tb_sa2x2.dut.pe11.product[15:0]
+tb_sa2x2.dut.pe11.acc_reg[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

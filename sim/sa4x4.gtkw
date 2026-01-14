@@ -1,0 +1,86 @@
+[*]
+[*] GTKWave Analyzer v3.3.107 (w)1999-2020 BSI
+[*] Tue Jan  6 05:04:28 2026
+[*]
+[dumpfile] "/Users/jihojun/Desktop/systolic_pe/sim/sa4x4.vcd"
+[dumpfile_mtime] "Tue Jan  6 04:30:59 2026"
+[dumpfile_size] 13608
+[savefile] "/Users/jihojun/Desktop/systolic_pe/sim/sa4x4.gtkw"
+[timestart] 0
+[size] 1710 1069
+[pos] -1 -2
+*-14.778120 51200 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_sa4x4_flat.
+[treeopen] tb_sa4x4_flat.dut.
+[sst_width] 193
+[signals_width] 141
+[sst_expanded] 1
+[sst_vpaned_height] 331
+@28
+tb_sa4x4_flat.clk
+tb_sa4x4_flat.reset
+tb_sa4x4_flat.en
+@420
+tb_sa4x4_flat.a0[7:0]
+tb_sa4x4_flat.a1[7:0]
+tb_sa4x4_flat.a2[7:0]
+tb_sa4x4_flat.a3[7:0]
+tb_sa4x4_flat.b0[7:0]
+tb_sa4x4_flat.b1[7:0]
+tb_sa4x4_flat.b2[7:0]
+tb_sa4x4_flat.b3[7:0]
+@c00420
+tb_sa4x4_flat.c00[31:0]
+@28
+(0)tb_sa4x4_flat.c00[31:0]
+(1)tb_sa4x4_flat.c00[31:0]
+(2)tb_sa4x4_flat.c00[31:0]
+(3)tb_sa4x4_flat.c00[31:0]
+(4)tb_sa4x4_flat.c00[31:0]
+(5)tb_sa4x4_flat.c00[31:0]
+(6)tb_sa4x4_flat.c00[31:0]
+(7)tb_sa4x4_flat.c00[31:0]
+(8)tb_sa4x4_flat.c00[31:0]
+(9)tb_sa4x4_flat.c00[31:0]
+(10)tb_sa4x4_flat.c00[31:0]
+(11)tb_sa4x4_flat.c00[31:0]
+(12)tb_sa4x4_flat.c00[31:0]
+(13)tb_sa4x4_flat.c00[31:0]
+(14)tb_sa4x4_flat.c00[31:0]
+(15)tb_sa4x4_flat.c00[31:0]
+(16)tb_sa4x4_flat.c00[31:0]
+(17)tb_sa4x4_flat.c00[31:0]
+(18)tb_sa4x4_flat.c00[31:0]
+(19)tb_sa4x4_flat.c00[31:0]
+(20)tb_sa4x4_flat.c00[31:0]
+(21)tb_sa4x4_flat.c00[31:0]
+(22)tb_sa4x4_flat.c00[31:0]
+(23)tb_sa4x4_flat.c00[31:0]
+(24)tb_sa4x4_flat.c00[31:0]
+(25)tb_sa4x4_flat.c00[31:0]
+(26)tb_sa4x4_flat.c00[31:0]
+(27)tb_sa4x4_flat.c00[31:0]
+(28)tb_sa4x4_flat.c00[31:0]
+(29)tb_sa4x4_flat.c00[31:0]
+(30)tb_sa4x4_flat.c00[31:0]
+(31)tb_sa4x4_flat.c00[31:0]
+@1401600
+-group_end
+@420
+tb_sa4x4_flat.c01[31:0]
+tb_sa4x4_flat.c02[31:0]
+tb_sa4x4_flat.c03[31:0]
+tb_sa4x4_flat.c10[31:0]
+tb_sa4x4_flat.c11[31:0]
+tb_sa4x4_flat.c12[31:0]
+tb_sa4x4_flat.c13[31:0]
+tb_sa4x4_flat.c20[31:0]
+tb_sa4x4_flat.c21[31:0]
+tb_sa4x4_flat.c22[31:0]
+tb_sa4x4_flat.c23[31:0]
+tb_sa4x4_flat.c30[31:0]
+tb_sa4x4_flat.c31[31:0]
+tb_sa4x4_flat.c32[31:0]
+tb_sa4x4_flat.c33[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
