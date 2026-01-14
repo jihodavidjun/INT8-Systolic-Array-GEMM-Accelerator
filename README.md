@@ -88,6 +88,10 @@ INT8-Systolic-Array-GEMM-Accelerator/
 │   ├── tb_top_memh.sv     # Top-level streaming testbench
 │   └── legacy/            # Intermediate / exploratory testbenches
 │
+├── sim/                   # Simulation artifacts
+│   ├── *.vcd
+│   └── *.gtkw
+│
 ├── py/                    # Python reference model & generators
 │   ├── gen_vectors.py
 │   ├── gen_stream_vectors.py
