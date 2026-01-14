@@ -51,16 +51,15 @@ So values of A move east, values of B move south.
 A stream enters from the left (rows), B stream enters from the top (cols).
 
 ```
-            b_in[0]  b_in[1]  b_in[2]  b_in[3]
-              |        |        |        |
-a_in[0] -> [PE00] -> [PE01] -> [PE02] -> [PE03]
-              |        |        |        |
-a_in[1] -> [PE10] -> [PE11] -> [PE12] -> [PE13]
-              |        |        |        |
-a_in[2] -> [PE20] -> [PE21] -> [PE22] -> [PE23]
-              |        |        |        |
-a_in[3] -> [PE30] -> [PE31] -> [PE32] -> [PE33]
-              |        |        |        |
+      b00  b01  b02   b03
+       ↓   ↓    ↓     ↓
+a00 → PE → PE → PE → PE
+       ↓   ↓    ↓     ↓
+a10 → PE → PE → PE → PE
+       ↓   ↓    ↓     ↓
+a20 → PE → PE → PE → PE
+       ↓   ↓    ↓     ↓
+a30 → PE → PE → PE → PE
 ```
 
 Each PE holds one accumulator `acc_out[row][col]`.
