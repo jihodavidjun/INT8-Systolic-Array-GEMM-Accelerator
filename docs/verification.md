@@ -68,7 +68,7 @@ iverilog -g2012 -o sim/tb_sa4x4.out rtl/pe.sv rtl/sa4x4.sv tb/tb_sa4x4_pytorch.s
 vvp sim/tb_sa4x4.out
 ```
 
-### Array test (example)
+### Top streaming test (example)
 ```
 iverilog -g2012 -o sim/tb_top_memh.out \
   rtl/fifo.sv rtl/controller.sv rtl/pe.sv rtl/sa4x4.sv rtl/top.sv \
