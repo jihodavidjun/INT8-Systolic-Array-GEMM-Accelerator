@@ -49,8 +49,11 @@ Detailed diagrams are provided in:
 Verification is performed **hierarchically**:
 
 **1. Single PE verification**
+
 **2. 2×2 systolic array verification**
+
 **3. 4×4 systolic array verification**
+
 **4. FIFO-fed top-level verification**
 
 A PyTorch golden model generates reference outputs:
