@@ -1,169 +1,118 @@
 # INT8-Systolic-Array-GEMM-Accelerator
 
-This project implements a **signed INT8 systolic array accelerator** for matrix multiplication (GEMM), the core compute primitive behind modern neural network inference accelerators (TPUs, NPUs, AI ASICs).
-
-The design is written in **SystemVerilog**, verified hierarchically from a single processing element (PE) up to a **FIFO-fed top-level accelerator**, and cross-validated against a **PyTorch golden model**.
+This repository implements a **signed INT8 systolic array accelerator** for matrix multiplication (GEMM), the compute primitive behind modern ML inference accelerators such as TPUs and NPUs. The design is written in **SystemVerilog** and verified hierarchically (from a single processing element to a top-level streaming accelerator) against a **PyTorch golden model**.
 
 ---
 
-## What This Accelerator Does
+## High-level pipeline
 
-- Performs matrix multiplication using a **2D systolic array**
-- Each Processing Element (PE) executes a **signed INT8 multiply–accumulate (MAC)**
-- Data streams through the array in a **pipelined, steady-state fashion**
-- Supports **FIFO-based input streaming** at the top level
-- Produces outputs that match **PyTorch `A @ B` exactly** for a 4×4 matrix
+Overall data path through the accelerator:
 
-This models the compute core used in real ML accelerators such as Google TPUs and inference NPUs.
+Input A/B → FIFOs → Stream Controller → Systolic Array (NxN PEs) → Output C
+
+The system accepts streams of **A** and **B** input matrices, buffers them in FIFOs, orchestrates timing via a controller and performs multiply–accumulate using a 2D systolic array. The result stream produces the matrix **C**.
+
+---
+
+## Systolic Dataflow
+
+Each **Processing Element (PE)** contains an INT8×INT8 multiplier and a local accumulator. **A** values flow east across the array; **B** values flow south; partial sums remain local. The following diagram illustrates the 4×4 case:
+
+An **NxN** parameterized version (`rtl/saNxN.sv`) is provided for scaling beyond 4×4.
 
 ---
 
 ## Why INT8?
 
-INT8 arithmetic is standard for inference because it:
-
-- Reduces **area and power** vs FP32
-- Increases **throughput**
-- Preserves accuracy with proper quantization
-
-This design uses **signed INT8 inputs** with a **32-bit accumulator** to avoid overflow.
-
----
-
-## Systolic Dataflow Overview
-
-- **A values flow left → right**
-- **B values flow top → bottom**
-- **Partial sums remain local** inside each PE
-- No global accumulation or shared memory during compute
-
-This minimizes memory traffic and maximizes data reuse.
-
-Detailed diagrams are provided in:
-`docs/dataflow.md`
+INT8 arithmetic reduces area and power consumption compared to floating point and increases throughput while maintaining accuracy when combined with proper quantization. The design uses signed INT8 inputs with a 32-bit accumulator to avoid overflow.
 
 ---
 
 ## Verification Strategy 
 
-Verification is performed **hierarchically**:
+Verification is performed hierarchically using self-checking **SystemVerilog testbenches** and **Python scripts** to generate golden data:
 
-**1. Single PE verification**
+1. **PE-level tests** (`tb/tb_pe.sv`) validate signed INT8 multiply-accumulate behavior, reset handling, and operand forwarding within a single processing element.
 
-**2. 2×2 systolic array verification**
+2. **Array-level tests** (`tb/tb_sa4x4_pytorch.sv`) feed randomly generated INT8 matrices and compare the RTL output against PyTorch’s `A @ B` result.
 
-**3. 4×4 systolic array verification**
+3. **Top-level streaming tests** (`tb/tb_top_memh.sv`) exercise the full accelerator pipeline including FIFOs, the controller, and the **systolic array by streaming `.memh` input files.
 
-**4. FIFO-fed top-level verification**
+The Python scripts in `py/` generate human-readable vector files and `.memh` memory images for both inputs and expected outputs.
 
-A PyTorch golden model generates reference outputs:
+### Example simulation waveform
 
-- Random signed INT8 matrices `A` and `B`
-- Golden result `C = A @ B`
-- RTL results compared element-by-element
+<img width="1272" height="314" alt="gtksimsysarray" src="https://github.com/user-attachments/assets/d842886f-a949-468a-b31e-fd2c9de84b91" />
 
-Simulation prints:
-`PASS: RTL matches PyTorch golden model`
-only if all outputs match exactly.
+The waveform shows the systolic accumulation behavior where each PE performs an INT8×INT8 multiply-accumulate while forwarding operands to neighboring processing elements.
 
-Details are documented in:
-`docs/verification.md`
+---
+
+## Quick Start
+
+To run the 4×4 array test with Icarus Verilog:
+```
+iverilog -g2012 -o sim/tb_sa4x4.out rtl/pe.sv rtl/sa4x4.sv tb/tb_sa4x4_pytorch.sv
+vvp sim/tb_sa4x4.out
+```
+For the top-level streaming test:
+```
+iverilog -g2012 -o sim/tb_top_memh.out \
+  rtl/fifo.sv rtl/controller.sv rtl/pe.sv rtl/sa4x4.sv rtl/top.sv \
+  tb/tb_top_memh.sv
+vvp sim/tb_top_memh.out
+```
+A **PASS** message indicates the RTL matches the golden model.
 
 ---
 
 ## Repository Structure
-
 ```
-INT8-Systolic-Array-GEMM-Accelerator/
-├── rtl/                   # Hardware RTL (SystemVerilog)
-│   ├── pe.sv              # Processing Element (INT8 MAC)
-│   ├── sa2x2.sv           # 2×2 systolic array
-│   ├── sa4x4.sv           # 4×4 systolic array (validated)
-│   ├── saNxN.sv           # Parametric NxN version (conceptual)
-│   ├── fifo.sv            # Input FIFOs
-│   ├── controller.sv      # Stream control logic
-│   └── top.sv             # FIFO-fed top-level accelerator
-│
-├── tb/                    # Testbenches
-│   ├── tb_pe.sv
-│   ├── tb_sa2x2.sv
-│   ├── tb_sa4x4_pytorch.sv
-│   ├── tb_top_memh.sv     # Top-level streaming testbench
-│   └── legacy/            # Intermediate / exploratory testbenches
-│
-├── sim/                   # Simulation artifacts
-│   ├── *.vcd
-│   └── *.gtkw
-│
-├── py/                    # Python reference model & generators
-│   ├── gen_vectors.py
-│   ├── gen_stream_vectors.py
-│   ├── make_stream_memh.py
-│   └── make_stream_vectors.py
-│
-├── data/                  # Generated test vectors
-│   ├── vectors.txt
-│   ├── stream_vectors.txt
-│   ├── stream_a.memh
-│   ├── stream_b.memh
-│   └── exp_c.memh
-│
-├── synth/                 # Synthesis (rough area estimation)
-│   ├── yosys.ys
-│   ├── netlist/
-│   │   └── sa4x4_mapped.v
-│   └── reports/
-│       ├── area.rpt
-│       └── yosys.log
-│
-├── docs/
-│   ├── architecture.md
-│   ├── dataflow.md
-│   └── verification.md
-│
-└── README.md
+rtl/       # SystemVerilog RTL: PE, 2×2/4×4/NxN arrays, FIFOs, controller, top
+tb/        # Testbenches: PE, 2×2 array, 4×4 array, streaming top
+py/        # Python scripts: generate vectors, stream memh files, reference model
+data/      # Generated test vectors and memh files
+sim/       # Simulation artifacts: compiled testbench binaries, VCD waveform dumps, GTKWave viewing
+synth/     # Yosys synthesis scripts, netlists, area reports
+docs/      # Additional documentation (architecture, dataflow, verification)
 ```
 
 ---
 
-## Synthesis Results 
-The 4×4 systolic array was synthesized using **Yosys** for rough area estimation.
+## Synthesis & Performance
+The 4×4 array was synthesized using **Yosys** for rough area estimation:
 
-- **Scope**: compute array only (sa4x4)
-- **Technology**: generic logic mapping
-- **Result**: **~11.8k** total logic cells, **768** flip-flops
+| Scope | Technology                  | Approx. logic cells | Flip-flops |
+| ----- | --------------------------- | ------------------- | ---------- |
+| sa4x4 | generic logic mapping (ABC) | ~11.8k              | 768        |
 
-These numbers are **not PDK-specific** and are intended for **architectural comparison**, not tape-out.
+### Performance Model
 
----
+For an **N×N systolic array**:
 
-## Tools Used
+- Number of MAC units: **N²**
+- Peak throughput: **N² MACs per cycle**
 
-### Hardware Design & Verification
-- **SystemVerilog** (RTL design)
-- **Icarus Verilog** (simulation)
-- **GTKWave** (waveform inspection)
+Example:
 
-### Machine Learning Reference
-- **Python**
-- **PyTorch** (golden reference model)
+| Array size | MAC units | Peak throughput |
+|-----------|-----------|----------------|
+| 4×4 | 16 | 16 MACs / cycle |
+| 8×8 | 64 | 64 MACs / cycle |
 
-### Synthesis
-- **Yosys** (RTL synthesis and area estimation)
-- **ABC** (logic mapping)
+### Latency
+
+For matrix multiplication C = A × B, where A = N × K and B = K × N, the compute phase requires **K cycles**, while the systolic pipeline introduces additional fill and drain latency.
+
+- Approximate latency: Latency ≈ K + 2(N − 1)
+- For the implemented **4×4 array**: Latency ≈ K + 6 cycles
+
+This model reflects the time required for data to propagate across the array and for partial sums to flush from the pipeline.
 
 ---
 
 ## Future Work
-- STA with PDK, AXI interface, larger arrays
-
----
-
-## Why This Project Matters
-
-This project demonstrates:
-
-- Hardware dataflow design for ML
-- RTL-level verification discipline
-- Integration of **Python ML models with hardware verification**
-- Realistic accelerator architecture decisions
+- Extend timing analysis using a real PDK.
+- Add interfaces (AXI/AHB) and memory-mapped registers.
+- Synthesize and test larger arrays (e.g. 8×8) to measure scaling.
+- Optional FPGA prototype for demonstration.
