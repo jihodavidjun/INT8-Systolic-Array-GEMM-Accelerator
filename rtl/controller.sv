@@ -14,7 +14,11 @@ module controller #(
     output logic pop_a,
     output logic pop_b,
     output logic en_sa,
-    output logic done
+    output logic done,
+
+    output logic [31:0] total_feed_cycles,
+    output logic [31:0] active_feed_cycles,
+    output logic [31:0] stall_feed_cycles
 );
 
     parameter int S_IDLE  = 0;
@@ -31,21 +35,31 @@ module controller #(
             state     <= S_IDLE;
             feed_cnt  <= 0;
             flush_cnt <= 0;
+            total_feed_cycles  <= '0;
+            active_feed_cycles <= '0;
+            stall_feed_cycles  <= '0;
         end else begin
             case (state)
                 S_IDLE: begin
                     feed_cnt  <= 0;
                     flush_cnt <= 0;
+                    total_feed_cycles  <= '0;
+                    active_feed_cycles <= '0;
+                    stall_feed_cycles  <= '0;
                     if (start) state <= S_FEED;
                 end
 
                 S_FEED: begin
+                    total_feed_cycles <= total_feed_cycles + 1'b1;
                     if (!fifo_a_empty && !fifo_b_empty) begin
+                        active_feed_cycles <= active_feed_cycles + 1'b1;
                         feed_cnt <= feed_cnt + 1;
                         if (feed_cnt == FEED_CYCLES-1) begin
                             state <= S_FLUSH;
                             flush_cnt <= 0;
                         end
+                    end else begin
+                        stall_feed_cycles <= stall_feed_cycles + 1'b1;
                     end
                 end
 

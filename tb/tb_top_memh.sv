@@ -113,9 +113,9 @@ module tb_top_memh;
         in_a_valid = 0; in_a_data = 0;
         in_b_valid = 0; in_b_data = 0;
 
-        $readmemh("stream_a.memh", Awords);
-        $readmemh("stream_b.memh", Bwords);
-        $readmemh("exp_c.memh", Cexp_u);
+        $readmemh("data/stream_a.memh", Awords);
+        $readmemh("data/stream_b.memh", Bwords);
+        $readmemh("data/exp_c.memh", Cexp_u);
 
         $display("A0 word = %h, B0 word = %h", Awords[0], Bwords[0]);
 

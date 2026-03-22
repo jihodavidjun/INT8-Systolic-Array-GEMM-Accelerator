@@ -17,6 +17,10 @@ module top #(
     input  logic start,
     output logic done,
 
+    output logic [31:0] total_feed_cycles,
+    output logic [31:0] active_feed_cycles,
+    output logic [31:0] stall_feed_cycles,
+
     output logic signed [31:0] c00, c01, c02, c03,
                                c10, c11, c12, c13,
                                c20, c21, c22, c23,
@@ -66,7 +70,10 @@ module top #(
         .pop_a(pop_a),
         .pop_b(pop_b),
         .en_sa(en_sa),
-        .done(done_raw)
+        .done(done_raw),
+        .total_feed_cycles(total_feed_cycles),
+        .active_feed_cycles(active_feed_cycles),
+        .stall_feed_cycles(stall_feed_cycles)
     );
 
     localparam bit MSB_FIRST = 1;

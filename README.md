@@ -1,118 +1,175 @@
-# INT8-Systolic-Array-GEMM-Accelerator
+# INT8 Systolic Array GEMM Accelerator
 
-This repository implements a **signed INT8 systolic array accelerator** for matrix multiplication (GEMM), the compute primitive behind modern ML inference accelerators such as TPUs and NPUs. The design is written in **SystemVerilog** and verified hierarchically (from a single processing element to a top-level streaming accelerator) against a **PyTorch golden model**.
+## 1. Overview
+This repository implements a signed INT8 GEMM accelerator in SystemVerilog using a 4x4 systolic array core.
 
----
+Current implementation includes:
+- 4x4 compute core (`rtl/sa4x4.sv`) built from INT8 MAC processing elements (`rtl/pe.sv`)
+- Parameterized array module (`rtl/saNxN.sv`) for scaling experiments
+- Streaming top-level with dual input FIFOs + controller (`rtl/top.sv`, `rtl/fifo.sv`, `rtl/controller.sv`)
+- Hierarchical verification with SystemVerilog testbenches and Python-generated golden data
+- Bandwidth-throttled, cycle-accurate performance characterization (`tb/tb_top_bw_perf.sv`, `py/run_bw_sweep.py`)
+- Yosys synthesis report for rough logic complexity (`synth/reports/area.rpt`)
 
-## High-level pipeline
+The focus is functional correctness and simulation-based performance characterization, not full SoC memory-system modeling.
 
-Overall data path through the accelerator:
+## 2. Architecture and Dataflow
+The compute kernel is a systolic array of PEs:
+- Inputs are signed INT8
+- Each PE performs INT8xINT8 multiply-accumulate into a 32-bit accumulator
+- `A` values propagate horizontally (east)
+- `B` values propagate vertically (south)
+- Partial sums remain local in each PE accumulator
 
-Input A/B → FIFOs → Stream Controller → Systolic Array (NxN PEs) → Output C
+For the implemented 4x4 core:
+- Parallel MAC units: 16
+- Peak feed-window compute rate (when fully fed): 16 MAC/cycle
 
-The system accepts streams of **A** and **B** input matrices, buffers them in FIFOs, orchestrates timing via a controller and performs multiply–accumulate using a 2D systolic array. The result stream produces the matrix **C**.
-
----
-
-## Systolic Dataflow
-
-Each **Processing Element (PE)** contains an INT8×INT8 multiplier and a local accumulator. **A** values flow east across the array; **B** values flow south; partial sums remain local. The following diagram illustrates the 4×4 case:
-
-An **NxN** parameterized version (`rtl/saNxN.sv`) is provided for scaling beyond 4×4.
-
----
-
-## Why INT8?
-
-INT8 arithmetic reduces area and power consumption compared to floating point and increases throughput while maintaining accuracy when combined with proper quantization. The design uses signed INT8 inputs with a 32-bit accumulator to avoid overflow.
-
----
-
-## Verification Strategy 
-
-Verification is performed hierarchically using self-checking **SystemVerilog testbenches** and **Python scripts** to generate golden data:
-
-1. **PE-level tests** (`tb/tb_pe.sv`) validate signed INT8 multiply-accumulate behavior, reset handling, and operand forwarding within a single processing element.
-
-2. **Array-level tests** (`tb/tb_sa4x4_pytorch.sv`) feed randomly generated INT8 matrices and compare the RTL output against PyTorch’s `A @ B` result.
-
-3. **Top-level streaming tests** (`tb/tb_top_memh.sv`) exercise the full accelerator pipeline including FIFOs, the controller, and the **systolic array by streaming `.memh` input files.
-
-The Python scripts in `py/` generate human-readable vector files and `.memh` memory images for both inputs and expected outputs.
+An `NxN` module exists for structural scaling experiments, but repository validation and reported numbers are centered on the 4x4 implementation.
 
 ### Example simulation waveform
-
 <img width="1272" height="314" alt="gtksimsysarray" src="https://github.com/user-attachments/assets/d842886f-a949-468a-b31e-fd2c9de84b91" />
 
-The waveform shows the systolic accumulation behavior where each PE performs an INT8×INT8 multiply-accumulate while forwarding operands to neighboring processing elements.
+## 3. Streaming Top-Level and Control
+Top-level pipeline:
 
----
+`Input streams -> FIFO A/B -> controller -> sa4x4 -> C outputs`
 
-## Quick Start
+Implemented control behavior:
+- Controller starts on `start`
+- In FEED state, it issues pops only when both FIFOs are non-empty
+- FEED continues until 12 successful word-pair consumptions (`FEED_CYCLES=12`)
+- Then FLUSH runs for 4 cycles (`FLUSH_CYCLES=4`) before `done`
 
-To run the 4×4 array test with Icarus Verilog:
-```
+Performance counters are implemented in `rtl/controller.sv` and exposed via `rtl/top.sv`:
+- `total_feed_cycles`
+- `active_feed_cycles`
+- `stall_feed_cycles`
+
+Definition used by the performance flow:
+- Stall cycle = FEED-state cycle where at least one FIFO is empty, so no A/B word pair is consumed.
+
+## 4. Verification
+Verification is layered and self-checking:
+
+1. PE unit test:
+- `tb/tb_pe.sv`
+
+2. Array-level tests (including PyTorch reference comparison):
+- `tb/tb_sa2x2.sv`
+- `tb/tb_sa4x4.sv`
+- `tb/tb_sa4x4_flat.sv`
+- `tb/tb_sa4x4_pytorch.sv`
+
+3. Streaming top-level correctness:
+- `tb/tb_top_memh.sv`
+- Uses `data/stream_a.memh`, `data/stream_b.memh`, `data/exp_c.memh`
+
+Python vector/memory generators:
+- `py/gen_vectors.py`
+- `py/make_stream_memh.py`
+- `py/gen_stream_vectors.py`
+
+Typical runs:
+
+```bash
+# 4x4 array vs PyTorch-derived vectors
 iverilog -g2012 -o sim/tb_sa4x4.out rtl/pe.sv rtl/sa4x4.sv tb/tb_sa4x4_pytorch.sv
 vvp sim/tb_sa4x4.out
-```
-For the top-level streaming test:
-```
+
+# Streaming top-level correctness
 iverilog -g2012 -o sim/tb_top_memh.out \
   rtl/fifo.sv rtl/controller.sv rtl/pe.sv rtl/sa4x4.sv rtl/top.sv \
   tb/tb_top_memh.sv
 vvp sim/tb_top_memh.out
 ```
-A **PASS** message indicates the RTL matches the golden model.
 
----
+## 5. Performance Characterization
+### Methodology
+Performance characterization is done with `tb/tb_top_bw_perf.sv`.
 
-## Repository Structure
+What it does:
+- Streams the same verified workload while intentionally throttling feed rate
+- Uses controller counters to measure active vs stall behavior in the FEED window
+- Computes utilization and effective throughput from cycle counts
+- Optionally appends run results to CSV (`sim/bw_sweep.csv`)
+
+Run commands:
+
+```bash
+# Build performance testbench
+iverilog -g2012 -o sim/tb_top_bw_perf.out \
+  rtl/fifo.sv rtl/controller.sv rtl/pe.sv rtl/sa4x4.sv rtl/top.sv \
+  tb/tb_top_bw_perf.sv
+
+# Default 3-case sweep and CSV export
+python3 py/run_bw_sweep.py
 ```
-rtl/       # SystemVerilog RTL: PE, 2×2/4×4/NxN arrays, FIFOs, controller, top
-tb/        # Testbenches: PE, 2×2 array, 4×4 array, streaming top
-py/        # Python scripts: generate vectors, stream memh files, reference model
-data/      # Generated test vectors and memh files
-sim/       # Simulation artifacts: compiled testbench binaries, VCD waveform dumps, GTKWave viewing
-synth/     # Yosys synthesis scripts, netlists, area reports
-docs/      # Additional documentation (architecture, dataflow, verification)
-```
 
----
+### Parameters (`GAP`, `PRELOAD`)
+- `GAP`: idle cycles inserted between pushed A/B word pairs after each successful push
+- `PRELOAD`: number of A/B word pairs loaded before asserting `start`
 
-## Synthesis & Performance
-The 4×4 array was synthesized using **Yosys** for rough area estimation:
+Interpretation:
+- Larger `GAP` reduces sustained input feed rate
+- Smaller `PRELOAD` reduces startup buffering and can increase early stalls
 
-| Scope | Technology                  | Approx. logic cells | Flip-flops |
-| ----- | --------------------------- | ------------------- | ---------- |
-| sa4x4 | generic logic mapping (ABC) | ~11.8k              | 768        |
+### Metric definitions
+For each case:
+- `total_feed_cycles`: cycles spent in FEED state
+- `active_feed_cycles`: FEED cycles that consumed one A/B word pair
+- `stall_feed_cycles`: FEED cycles with no consume due to FIFO underflow condition
 
-### Performance Model
+Derived metrics:
+- `util_feed (%) = 100 * active_feed_cycles / total_feed_cycles`
+- `throughput_feed (MAC/cycle) = (N^2 * K) / total_feed_cycles`
+- `throughput_exec (MAC/cycle) = (N^2 * K) / (total_feed_cycles + FLUSH_CYCLES)`
+- `macs_per_input_byte = (N^2 * K) / (active_feed_cycles * 8)`
 
-For an **N×N systolic array**:
+This workload uses `N=4`, `K=12`, so total MACs per run are 192.
 
-- Number of MAC units: **N²**
-- Peak throughput: **N² MACs per cycle**
+### Results tables
+Source: validated `PERF_SUMMARY` output and `sim/bw_sweep.csv`.
 
-Example:
+**Table A: Feed utilization and stalls**
 
-| Array size | MAC units | Peak throughput |
-|-----------|-----------|----------------|
-| 4×4 | 16 | 16 MACs / cycle |
-| 8×8 | 64 | 64 MACs / cycle |
+| Case | GAP | PRELOAD | total_feed_cycles | active_feed_cycles | stall_feed_cycles | util_feed (%) |
+| --- | --- | --- | --- | --- | --- | --- |
+| ideal_full_feed | 0 | 12 | 12 | 12 | 0 | 100.00 |
+| reduced_feed_gap1 | 1 | 2 | 21 | 12 | 9 | 57.14 |
+| constrained_feed_gap3 | 3 | 0 | 47 | 12 | 35 | 25.53 |
 
-### Latency
+**Table B: Effective throughput and input efficiency**
 
-For matrix multiplication C = A × B, where A = N × K and B = K × N, the compute phase requires **K cycles**, while the systolic pipeline introduces additional fill and drain latency.
+| Case | throughput_feed (MAC/cycle) | throughput_exec (MAC/cycle) | macs_per_input_byte |
+| --- | --- | --- | --- |
+| ideal_full_feed | 16.000 | 12.000 | 2.000 |
+| reduced_feed_gap1 | 9.143 | 7.680 | 2.000 |
+| constrained_feed_gap3 | 4.085 | 3.765 | 2.000 |
 
-- Approximate latency: Latency ≈ K + 2(N − 1)
-- For the implemented **4×4 array**: Latency ≈ K + 6 cycles
+### Key observations
+- Feed throttling directly reduces utilization: 100.00% -> 57.14% -> 25.53% across the three cases.
+- Stall cycles increase as feed is constrained: 0 -> 9 -> 35.
+- Effective throughput drops accordingly in both feed-window and execution-window definitions.
+- `macs_per_input_byte` stays constant in this setup because total consumed bytes and total MAC count are fixed for this workload.
 
-This model reflects the time required for data to propagate across the array and for partial sums to flush from the pipeline.
+## 6. Synthesis
+Yosys synthesis artifacts are in `synth/`.
 
----
+From `synth/reports/area.rpt` (4x4 core hierarchy):
+- Total mapped cells: 11,840
+- Flip-flops (`$_SDFFE_PP0P_`): 768
 
-## Future Work
-- Extend timing analysis using a real PDK.
-- Add interfaces (AXI/AHB) and memory-mapped registers.
-- Synthesize and test larger arrays (e.g. 8×8) to measure scaling.
-- Optional FPGA prototype for demonstration.
+These are logic-mapped counts from Yosys/ABC, useful for relative complexity; they are not physical area (um^2) or post-layout timing/power.
+
+## 7. Limitations
+- Performance numbers are simulation-based under the implemented feed-throttle model.
+- No DRAM, AXI, arbitration, cache, or burst-traffic modeling is implemented.
+- No post-route timing closure or silicon frequency characterization is included.
+- Published performance results are for the current 4x4-centered flow.
+
+## 8. Future Work
+- Add a realistic external-memory interface model and transaction-level bandwidth experiments.
+- Extend characterization across larger `N` configurations using `saNxN`.
+- Add automated regression scripts that combine correctness and performance sweeps.
+- Add FPGA prototyping and timing-aware implementation studies.

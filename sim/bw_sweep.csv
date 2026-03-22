@@ -1,0 +1,4 @@
+case,gap,preload,feed_total,active,stall,util_feed_pct,stall_pct,macs,tput_feed_mac_per_cycle,tput_exec_mac_per_cycle,in_bytes,macs_per_input_byte,reuse_a,reuse_b
+ideal_full_feed,0,12,12,12,0,100.00,0.00,192,16.000,12.000,96,2.000,4,4
+reduced_feed_gap1,1,2,21,12,9,57.14,42.86,192,9.143,7.680,96,2.000,4,4
+constrained_feed_gap3,3,0,47,12,35,25.53,74.47,192,4.085,3.765,96,2.000,4,4
