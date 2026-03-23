@@ -65,7 +65,7 @@ Verification is layered and self-checking:
 - `tb/tb_top_memh.sv`
 - Uses `data/stream_a.memh`, `data/stream_b.memh`, `data/exp_c.memh`
 
-Python vector/memory generators:
+Pytorch vector/memory generators:
 - `py/gen_vectors.py`
 - `py/make_stream_memh.py`
 - `py/gen_stream_vectors.py`
